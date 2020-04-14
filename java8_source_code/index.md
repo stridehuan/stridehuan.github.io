@@ -2,8 +2,10 @@
 
 ### 目录
 - 并发相关
-   - [线程池](thread/thread_pool.md)
-   - [线程可见性问题](thread/thread_visable.md)
+   - [JDK线程池源码解析](thread/thread_pool.md)
+
+   - [多线程的变量可见性问题](thread/thread_visable.md)
+
 
 
 
