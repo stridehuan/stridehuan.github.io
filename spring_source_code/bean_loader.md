@@ -18,8 +18,8 @@ getBean是 AbstractBeanFactory 这个抽象类的一个方法，下面是它在�
 
 ``` java
 protected String transformedBeanName(String name) {
-		return canonicalName(BeanFactoryUtils.transformedBeanName(name));
-	}
+  return canonicalName(BeanFactoryUtils.transformedBeanName(name));
+}
 ```
 
 第一步，使用 BeanFactoryUtils.transformedBeanName 工具方法去除 FactoryBean 的 "&" 前缀。
@@ -34,26 +34,26 @@ protected String transformedBeanName(String name) {
 
 ``` java
 protected Object getSingleton(String beanName, boolean allowEarlyReference) {
-  // 1. 尝试从 singletonObjects 中加载 bean
+	// 1. 尝试从 singletonObjects 中加载 bean
 	Object singletonObject = this.singletonObjects.get(beanName);
 	if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) {
 		synchronized (this.singletonObjects) {
-      // 2. 尝试从 earlySingletonObjects 中加载 bean
+			// 2. 尝试从 earlySingletonObjects 中加载 bean
 			singletonObject = this.earlySingletonObjects.get(beanName);
 			if (singletonObject == null && allowEarlyReference) {
-        // 3. 尝试从 singletonFactories 中获取 bean 的 objectFactory
+				// 3. 尝试从 singletonFactories 中获取 bean 的 objectFactory
 				ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
-				if (singletonFactory != null) {
-          // 4. 使用 objectFactory 创建 bean
-					singletonObject = singletonFactory.getObject();
-          // 5. 将创建的 bean 更新到另外两个缓存 map 中
-					this.earlySingletonObjects.put(beanName, singletonObject);
-					this.singletonFactories.remove(beanName);
-				}
-			}
-		}
-	}
-	return singletonObject;
+        	if (singletonFactory != null) {
+            // 4. 使用 objectFactory 创建 bean
+            singletonObject = singletonFactory.getObject();
+            // 5. 将创建的 bean 更新到另外两个缓存 map 中
+            this.earlySingletonObjects.put(beanName, singletonObject);
+            this.singletonFactories.remove(beanName);
+          }
+      }
+    }
+  }
+  return singletonObject;
 }
 ```
 
