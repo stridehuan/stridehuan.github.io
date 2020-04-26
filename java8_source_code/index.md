@@ -7,6 +7,8 @@
 
    - [多线程的变量可见性问题](thread/thread_visable.md)
 
+   - [CAS底层Unsafe相关操作分析](cas/unsafe.md)
+
 - Java集合相关
   
    - [HashMap源码解析](collection/hash_map.md)
